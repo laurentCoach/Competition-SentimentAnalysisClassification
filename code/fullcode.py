@@ -85,7 +85,56 @@ pipeline = Pipeline([('vect', CountVectorizer()),
                       ('clf', SGDClassifier(loss='hinge', penalty='l2',
                                             alpha=1e-3, random_state=42,)),
 ])
-  
+
+#Tune Model
+pipeline = Pipeline([
+    ('vect', CountVectorizer()),
+    ('tfidf', TfidfTransformer()),
+    ('clf', SGDClassifier()),
+])
+parameters = {  
+    'vect__max_df': (0.5, 0.75, 1.0),
+    'vect__max_features': (None, 5000, 10000, 50000),
+    'vect__ngram_range': ((1, 1), (1, 2)),  # unigrams or bigrams
+    'tfidf__use_idf': (True, False),
+    'tfidf__norm': ('l1', 'l2'), 
+    'classifier__fit_prior': (True, False),  
+    'classifier__class_prior': [0.1, 0.9],  
+    'classifier__alpha': (1, 0.1, 0.01, 0.001, 0.0001, 0.00001)  
+    } 
+
+pipeline = Pipeline([
+    ('vect',   CountVectorizer()),
+    ('tfidf',  TfidfTransformer()),
+    ('clf',  MultinomialNB())
+])
+parameters = {  
+    'vect__max_df': (0.5, 0.625, 0.75, 0.875, 1.0),  
+    'vect__max_features': (None, 5000, 10000, 20000),  
+    'vect__min_df': (1, 5, 10, 20, 50),  
+    'tfidf__use_idf': (True, False),  
+    'tfidf__sublinear_tf': (True, False),  
+    'vect__binary': (True, False),  
+    'tfidf__norm': ('l1', 'l2'),  
+    'clf__alpha': (1, 0.1, 0.01, 0.001, 0.0001, 0.00001)  
+    } 
+
+#Find Best Parameters
+grid_search = GridSearchCV(pipeline, parameters, n_jobs=-1, verbose=1)
+print("Performing grid search...")
+print("pipeline:", [name for name, _ in pipeline.steps])
+print("parameters:")
+print(parameters)
+#t0 = time()
+grid_search.fit(train.tweet, train.label)
+
+print("Best score: %0.3f" % grid_search.best_score_)
+print("Best parameters set:")
+best_parameters = grid_search.best_estimator_.get_params()
+for param_name in sorted(parameters.keys()):
+    print("\t%s: %r" % (param_name, best_parameters[param_name]))
+
+    
 #Make prediction with Train Data                    
 k_fold = KFold(n=len(train), n_folds=6)
 scores = []
