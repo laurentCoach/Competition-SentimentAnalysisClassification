@@ -49,6 +49,11 @@ def tweet_cleaner(text):
     words = tok.tokenize(lower_case)
     return (" ".join(words)).strip()
 
+#Multiple Pos Tweet by 10
+train_label = train['label'] == 1
+df_try = train[train_label]
+train = train.append([df_try]*10, ignore_index = True)
+
 #Clean Train Data Tweet
 training = train.tweet
 dftext = []
