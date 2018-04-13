@@ -9,5 +9,5 @@ Python 3.6
 - Scikit Learn
 
 ## Machine Learning Algorithms & Accuracy
-- Multinomial Naive Bayesian : 74%
+- Multinomial Naive Bayesian : 76.9%
 - Stochastic Gradient Descent : 74.6%
