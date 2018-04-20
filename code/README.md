@@ -26,3 +26,6 @@ TF(t) = (Number of times term t appears in a document) / (Total number of terms 
 IDF(t) = log_e(Total number of documents / Number of documents with term t in it).
 Value = TF * IDF
 ```
+
+### Why clean text data ?
+to be continue
