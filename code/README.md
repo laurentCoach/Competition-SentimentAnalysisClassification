@@ -28,4 +28,5 @@ Value = TF * IDF
 ```
 
 ### Why clean text data ?
-to be continue
+In the text analysis, we find punctuation (!,;:.?), lowercase and uppercase letters and also different signs (@ # ""). 
+The purpose of removing these different elements is to make sure that it does not bias for results
