@@ -1,7 +1,7 @@
 # Code
-The algorithm that gave me the best result is the SGD.
+The algorithm that gave me the best result is the LinearSVC.
 
-I used the Tune_Model.ipynb to tune my model with GridsearchCV.
+I used GridsearchCV function to tune my model.
 
 # Explanation
 
