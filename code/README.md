@@ -1,7 +1,7 @@
 # Code
 The algorithm that gave me the best result is the SGD.
 
-I used the Tune_Model.ibpy to tune my model with GridsearchCV.
+I used the Tune_Model.ipynb to tune my model with GridsearchCV.
 
 # Explanation
 
